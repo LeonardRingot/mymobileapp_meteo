@@ -22,7 +22,7 @@ accessibilityLabel="Learn more about this purple button"
   
   );
 }
-https://api.openweathermap.org/data/2.5/weather?lat=50.6688&lon=1.8348&appid=897d4d82ee64c739c6f99f2d2dc37c0d
+//https://api.openweathermap.org/data/2.5/weather?lat=50.6688&lon=1.8348&appid=897d4d82ee64c739c6f99f2d2dc37c0d
 
 
 const styles = StyleSheet.create({
