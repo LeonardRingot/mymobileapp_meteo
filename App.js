@@ -7,7 +7,7 @@ export default function App() {
   return (
     <>
     <View style={styles.container}>
-      <Text>Bienvenue sur mon API Meteo - Léonard Ringot</Text>
+      <Text>BZZZZ - Léonard Ringot</Text>
       <TextInput style={styles.input} onChangeText={onChangeText} value={text} />
       <StatusBar style="auto" />
     </View>
