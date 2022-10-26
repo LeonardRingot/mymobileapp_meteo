@@ -4,7 +4,6 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {format} from 'date-fns'
 import Weather from './Weather';
-
 import ButtonForecast from './ButtonForecast'
 import {da, fr} from 'date-fns/locale'
 
@@ -17,11 +16,9 @@ function HomeScreen() {
 }
 const Stack = createNativeStackNavigator();
 
-export default function Forecasts({data, forecast}){
+export default function Forecasts({data}){
     const [forecasts, setForecasts] = useState([])
-    
-
-
+    const navigation = useNavigation();
     useEffect (()=>{
       const forecastsData = data.list.map(f => {
         const dt = new Date (f.dt *1000)
@@ -56,21 +53,12 @@ export default function Forecasts({data, forecast}){
          style={styles.scroll}
          >
             {forecasts.map(f=>(
-              
-
-              
                 <View >
-                  
                      <Text  style={styles.day}>{f.day.toUpperCase()}</Text>
                     <View  style={styles.container}>
-                    {f.data.map(w=> <TouchableOpacity onPress={() => Alert.alert()} ><Weather forecast = {w}></Weather></TouchableOpacity>)}
+                    {f.data.map(w=> <TouchableOpacity onPress={() => navigation.navigate('buttonForecast')} ><Weather forecast = {w}></Weather></TouchableOpacity>)}
                     </View>
-                   
-       
-      
-                   
                 </View>
-           
             ))}
          </ScrollView>
          
