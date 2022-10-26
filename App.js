@@ -1,23 +1,57 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View, Button, Alert, TextInput  } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, Button, Alert, ActivityIndicator  } from 'react-native';
 import * as Location from 'expo-location';
+import axios from 'axios';
+import CurrentWeather from './components/CurrentWeather';
+import Forecasts from './components/Forecasts';
 export default function App() {
-  const [text, onChangeText] = React.useState('Useless Text');
+  const [text, onChangeText] = useState('Useless Text');
+  const [loading, setLoading] = useState(true)
+  const [data, setData]= useState(null);
+    const API_URL= (lat, lon)=> `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=9e5e34c9b8b6ccf6d3c269305d55891a&lang=fr&units=metric`
+// On recupere les coordonnes de l'utilisateur
+  useEffect (()=>{
+    const getCoordinates = async ()=>{
+
+     const {status}= await Location.requestForegroundPermissionsAsync()
+     if(status !== "granted")
+     {
+      return
+     }
+     const userLocation = await Location.getCurrentPositionAsync()
+     getWeather(userLocation)
+    }
+    getCoordinates()
+  }, [])
+
+  const getWeather = async (location)=>{
+    try{
+      const response = await axios.get(API_URL(location.coords.latitude, location.coords.longitude))
+      setData(response.data)
+      setLoading(false)
+    }catch(e) {
+      console.log("erreur dans getweather")
+    }
+    
+  }
+// Si geolocalisation non acceptés.....
+  if (loading)
+  {
+    return <View style={styles.container} >
+    <ActivityIndicator/>
+    </View>
+  }
+
+  
   return (
     <>
     <View style={styles.container}>
-      <Text>BZZZZ - Léonard Ringot</Text>
-      <TextInput style={styles.input} onChangeText={onChangeText} value={text} />
-      <StatusBar style="auto" />
+     <CurrentWeather data ={data}></CurrentWeather>
+       <Forecasts data= {data}></Forecasts>
+      
+      
     </View>
-
-<Button
-onPress={() => Alert.alert('Simple Button pressed')}
-title="Learn More"
-color="#841584"
-accessibilityLabel="Learn more about this purple button"
-/>
     </>  
   
   );
