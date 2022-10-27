@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     },
     day:{
         fontSize:16,
+        color:"#2F4F4F",
         fontWeight:"bold",
         marginBottom:10,
         marginLeft: 5

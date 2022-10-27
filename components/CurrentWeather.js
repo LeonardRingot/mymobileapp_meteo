@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert, ActivityIndicator, Image  } from 'react-native';
 import {isSameDay} from 'date-fns'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Details from"./Details"
 
 const getIcon = (icon)=> `http://openweathermap.org/img/wn/${icon}@4x.png`
 export default function CurrentWeather({data}){
@@ -28,20 +29,28 @@ export default function CurrentWeather({data}){
 
             <Text style={styles.temp}>{Math.round(currentWeather?.main.temp)} °C</Text>
             <Text style={styles.description}>{currentWeather?.weather[0].description}</Text> 
-            <Text style={styles.wind}>{Math.round(currentWeather?.wind.speed)} km/h</Text> 
-            <Text style={styles.humid}>{Math.round(currentWeather?.main.humidity)} % Humidité</Text> 
+             
+            {/* <Text style={styles.wind}>{Math.round(currentWeather?.wind.speed)} km/h</Text> 
+            <Text style={styles.humid}>{Math.round(currentWeather?.main.humidity)} % Humidité</Text>  */}
+            <Details data ={data} ></Details>
             </View>
+            
+            
         </>
     )
 }
-const COLOR = "#2F4F4F"
+const COLOR = "#282D3C"
 const styles = StyleSheet.create({
     container:{
-        marginTop:60,
+        marginTop:0,
         alignItems:"center",
-        height:"65%"
+        height:"65%",
+        borderBottomLeftRadius: 50,
+        borderBottomRightRadius: 50,
+        backgroundColor:"#9BB7D4"
     },
     city:{
+        marginTop:10,
         fontSize:36,
         fontWeight:"500",
         color: COLOR

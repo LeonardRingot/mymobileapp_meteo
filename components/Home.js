@@ -40,7 +40,6 @@ export default function Home() {
     }
     
   }
-// Si geolocalisation non acceptés.....
   if (loading)
   {
     return <View style={styles.container} >
@@ -61,7 +60,7 @@ export default function Home() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#6495ED',
+    backgroundColor: '#88B04B',
     alignItems: 'center',
     justifyContent: 'center',
   },
