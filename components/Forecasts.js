@@ -19,28 +19,39 @@ const Stack = createNativeStackNavigator();
 export default function Forecasts({data}){
     const [forecasts, setForecasts] = useState([])
     const navigation = useNavigation();
+    const curr_date = new Date();
+    curr_date.setDate(curr_date.getDate() + 1);
+    curr_date.setHours(0, 0, 0, 0, 0);
+    const target_dt = curr_date.valueOf() / 1000;
+    const days = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche']
     useEffect (()=>{
-      const forecastsData = data.list.map(f => {
-        const dt = new Date (f.dt *1000)
+      let forecastsData = data.list.map(f => {
+        let curr_dt = f.dt;
+        const dt = new Date(curr_dt * 1000)
         return ({
             data:dt,
             hour:dt.getHours(),
             temp:Math.round( f.main.temp),
             icon: f.weather[0].icon,
-            name: format(dt, "EEEE", {locale:fr})
+            name: format(dt, "EEEE", {locale:fr}),
+            date: f.dt_txt,
+            timestamp: curr_dt
         })
-      })
+      });
+
+      forecastsData = forecastsData.filter(val => {
+        return val.timestamp < target_dt
+      });
       let newForecastsData =forecastsData.map(forecast =>{
         return forecast.name
       }).filter((day, index, self)=>{
         return self.indexOf(day) === index
       }).map((day)=>{
         return {
-            day, 
+            day,
             data:forecastsData.filter((forecast)=>forecast.name === day)
         }
       })
-        console.log(newForecastsData)
       // Grouper les elementrs pas jours 
       setForecasts(newForecastsData)
     }, [data])
@@ -56,7 +67,7 @@ export default function Forecasts({data}){
                 <View >
                      <Text  style={styles.day}>{f.day.toUpperCase()}</Text>
                     <View  style={styles.container}>
-                    {f.data.map(w=> <TouchableOpacity onPress={() => navigation.navigate('buttonForecast')} ><Weather forecast = {w}></Weather></TouchableOpacity>)}
+                    {f.data.map(w=> <TouchableOpacity onPress={() => navigation.navigate('buttonForecast')} ><Weather data= {data}  forecast = {w}></Weather></TouchableOpacity>)}
                     </View>
                 </View>
             ))}

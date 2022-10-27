@@ -7,6 +7,7 @@ import CurrentWeather from './CurrentWeather';
 import Forecasts from './Forecasts';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ButtonForecast from './ButtonForecast';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,6 +53,7 @@ export default function Home() {
     <View style={styles.container}>
      <CurrentWeather data ={data}></CurrentWeather>
        <Forecasts data= {data}></Forecasts>
+       <ButtonForecast data= {data}></ButtonForecast>
     </View>
     </>  
   );
