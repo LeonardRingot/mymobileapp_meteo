@@ -12,7 +12,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator >
         <Stack.Screen options={{ headerShown: false }} name="home" component={Home} />
-        <Stack.Screen options={{ title: 'Détails prévisions' }} name="buttonForecast" component={ButtonForecast} />
+        <Stack.Screen options={{ title: 'Prévisions 7 jours' }} name="buttonForecast"  params='{data}' component={ButtonForecast} />
       </Stack.Navigator>
     </NavigationContainer>
   );

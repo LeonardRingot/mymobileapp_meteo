@@ -6,6 +6,7 @@ import {format} from 'date-fns'
 import Weather from './Weather';
 import ButtonForecast from './ButtonForecast'
 import {da, fr} from 'date-fns/locale'
+import CurrentWeather from './CurrentWeather';
 
 function HomeScreen() {
   return (
@@ -56,22 +57,37 @@ export default function Forecasts({data}){
       setForecasts(newForecastsData)
     }, [data])
 
+    
+    
     return (
       <>
+      
+ <Button  style={styles.button} onPress={() => navigation.navigate('buttonForecast',data= {data})} title="Previsions 7 jours" > <ButtonForecast  ></ButtonForecast></Button>
+     
+     
+      
          <ScrollView
          horizontal
          showsHorizontalScrollIndicator={false}
          style={styles.scroll}
          >
+           
             {forecasts.map(f=>(
                 <View >
                      <Text  style={styles.day}>{f.day.toUpperCase()}</Text>
+                     
                     <View  style={styles.container}>
-                    {f.data.map(w=> <TouchableOpacity onPress={() => navigation.navigate('buttonForecast')} ><Weather data= {data}  forecast = {w}></Weather></TouchableOpacity>)}
+                   
+                    {f.data.map(w=> 
+                    <TouchableOpacity ><Weather data= {data}  forecast = {w}></Weather></TouchableOpacity>
+                      
+                    )}
+                    
                     </View>
                 </View>
             ))}
          </ScrollView>
+         
          
          </>
     )
@@ -93,6 +109,12 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         marginLeft:5,
         marginRight:15
+    },
+    button:
+    {
+      alignItems:'right',
+      width:100,
+      color:"red"
     }
 })
 

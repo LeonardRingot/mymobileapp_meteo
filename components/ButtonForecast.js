@@ -1,31 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Button, Alert, ActivityIndicator, Image, ScrollView } from 'react-native';
-
+import data from "./Forecasts"
 import {isSameDay} from 'date-fns'
+import { useRoute } from '@react-navigation/native';
 const getIcon = (icon)=> `http://openweathermap.org/img/wn/${icon}@4x.png`
-export default function ButtonForecast(data){
-    const [buttonforecasts, setButtonForecasts] = useState([])
+
+export default function ButtonForecast({data}){
+   
+   const route = useRoute();
+   const [buttonforecasts, setButtonForecasts] = useState({
+    lat:route.params.data.city
+    
+})
+    console.log(buttonforecasts.lat)
     // useEffect(()=> {
         
-    //     const NextW = data.list.filter(forecast => {
-    //        const Next = new Date().getTime() + Math.abs(data.city.timezone * 1000)
+    //     const nextW = route.params.data.list.filter(forecast => {
+    //        const next = new Date().getTime() + Math.abs(route.params.data.city.timezone * 1000)
     //        const forecastNextDate = new Date(forecast.dt * 1000)
-    //            return isSameDay(Next, forecastNextDate)
+    //            return isSameDay(next, forecastNextDate)
     //        })
-    //        setButtonForecasts(NextW[0])
-    //    }, [data])
+    //        setButtonForecasts(nextW[0])
+    //    }, [route.params.data.city])
 
     return (
         <>
-            {/* <View style={styles.container}></View>
-            <Text style={styles.city}>{data?.city?.name}</Text>
+            <View style={styles.container}>
+            
+            <Text style={styles.city}>{buttonforecasts?.lat}</Text>
              <Text style={styles.proch}>Prochainement....</Text>
-             <Image  source ={{uri : getIcon(NextW?.weather[0].icon)}}
-            style={styles.image}/> */}
+              
             <Text>DLKZLKDE</Text>
-
+            </View>
         </>
-       
     )
 }
     const COLOR = "#2F4F4F"

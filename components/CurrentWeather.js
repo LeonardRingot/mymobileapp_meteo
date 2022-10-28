@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Button, Alert, ActivityIndicator, Image  } from
 import {isSameDay} from 'date-fns'
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Details from"./Details"
+import { LinearGradient } from 'expo-linear-gradient';
 
 const getIcon = (icon)=> `http://openweathermap.org/img/wn/${icon}@4x.png`
 export default function CurrentWeather({data}){
     const [currentWeather, setCurrentWeather] = useState(null)
+    
     useEffect(()=> {
         
      const currentW = data.list.filter(forecast => {
@@ -18,8 +20,8 @@ export default function CurrentWeather({data}){
     }, [data])
     return (
         <>
-        <View style={styles.container}>
-
+        <LinearGradient colors={['#0568b8', '#00d4ff']} style={styles.container}>
+        
        
             <Text style={styles.city}>{data?.city?.name}</Text>
             <Text style={styles.today}>Aujourd'hui</Text>
@@ -33,7 +35,7 @@ export default function CurrentWeather({data}){
             {/* <Text style={styles.wind}>{Math.round(currentWeather?.wind.speed)} km/h</Text> 
             <Text style={styles.humid}>{Math.round(currentWeather?.main.humidity)} % Humidité</Text>  */}
             <Details data ={data} ></Details>
-            </View>
+            </LinearGradient>
             
             
         </>
