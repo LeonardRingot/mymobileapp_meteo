@@ -73,13 +73,13 @@ export default function Forecasts({data}){
          >
            
             {forecasts.map(f=>(
-                <View >
-                     <Text  style={styles.day}>{f.day.toUpperCase()}</Text>
+                <View key={f.data.timestamp}>
+                     <Text key={f.data.timestamp} style={styles.day}>{f.day.toUpperCase()}</Text>
                      
-                    <View  style={styles.container}>
+                    <View key={f.data.timestamp} style={styles.container}>
                    
                     {f.data.map(w=> 
-                    <TouchableOpacity ><Weather data= {data}  forecast = {w}></Weather></TouchableOpacity>
+                    <TouchableOpacity key={w.timestamp} ><Weather data= {data} forecast = {w} key={w.timestamp}></Weather></TouchableOpacity>
                       
                     )}
                     
