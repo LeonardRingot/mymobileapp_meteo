@@ -22,7 +22,7 @@ export default function CurrentWeather({data}){
         <>
         <LinearGradient colors={['#0568b8', '#00d4ff']} style={styles.container}>
         
-            <Text>TEST UPDATE APK</Text>
+            
             <Text style={styles.city}>{data?.city?.name}</Text>
             <Text style={styles.today}>Aujourd'hui</Text>
 
