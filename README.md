@@ -1,2 +1,2 @@
 
-<a id="raw-url" href="https://github.com/LeonardRingot/mymobileapp_meteo/raw/master/mymobileapp_meteo-398b97e454fa4b58b40f8a0ef32d0481-signed.apk">Download APK</a>
+<a id="raw-url" href="https://github.com/LeonardRingot/mymobileapp_meteo/raw/master/mymobileapp_meteo-94b5ee38e9ba46eba97359d271d8460d-signed.apk">Download APK</a>
